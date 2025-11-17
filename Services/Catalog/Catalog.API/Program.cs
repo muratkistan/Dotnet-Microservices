@@ -5,27 +5,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddInfrastructureServices(settings =>
-{
-    settings.ConnectionString = builder.Configuration.GetValue<string>("MongoDbSettings:ConnectionString");
-    settings.DatabaseName = builder.Configuration.GetValue<string>("MongoDbSettings:DatabaseName");
-    settings.ProductsCollectionName = builder.Configuration.GetValue<string>("MongoDbSettings:ProductsCollectionName");
-    settings.BrandsCollectionName = builder.Configuration.GetValue<string>("MongoDbSettings:BrandsCollectionName");
-    settings.TypesCollectionName = builder.Configuration.GetValue<string>("MongoDbSettings:TypesCollectionName");
-});
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseAuthorization();

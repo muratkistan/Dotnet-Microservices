@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalog.Application.Features.Queries.Type
+namespace Catalog.Application.Features.Queries.Type.GetAll
 {
     public class GetAllTypesHandler : IRequestHandler<GetAllTypesQuery, IList<TypeResponse>>
     {

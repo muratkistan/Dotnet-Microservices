@@ -20,9 +20,9 @@ namespace Catalog.Domain.Entities
         public decimal Price { get; set; }
 
         [BsonIgnore]
-        public ProductBrand Brands { get; set; } = default!;
+        public ProductBrand Brands { get; set; } = default;
 
         [BsonIgnore]
-        public ProductType Types { get; set; } = default!;
+        public ProductType Types { get; set; } = default;
     }
 }

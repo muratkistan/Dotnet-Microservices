@@ -8,6 +8,7 @@ using Catalog.Application.Features.Queries.Product.GetByBrand;
 using Catalog.Application.Features.Queries.Product.GetById;
 using Catalog.Application.Features.Queries.Product.GetByName;
 using Catalog.Application.Features.Queries.Type;
+using Catalog.Application.Features.Queries.Type.GetAll;
 using Catalog.Application.Repositories;
 using Catalog.Domain;
 using Catalog.Domain.Entities;
