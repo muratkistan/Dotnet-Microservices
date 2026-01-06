@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Discount.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class RemoveproductId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,12 +18,12 @@ namespace Discount.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Code = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ProductName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Amount = table.Column<double>(type: "numeric(18,2)", nullable: false),
+                    Amount = table.Column<double>(type: "double precision", nullable: false),
                     Percent = table.Column<int>(type: "integer", nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
-                    UsedCount = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
-                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true)
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    UsedCount = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    ProductTypeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,10 +31,11 @@ namespace Discount.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coupons_Code",
+                name: "IX_Coupons_Code_IsActive",
                 table: "Coupons",
-                column: "Code",
-                unique: true);
+                columns: new[] { "Code", "IsActive" },
+                unique: true,
+                filter: "\"IsActive\" = true");
         }
 
         /// <inheritdoc />

@@ -9,12 +9,12 @@ namespace Discount.Application.Repositories
 {
     public interface ICouponRepository
     {
-        Task<Coupon> GetCoupon(string productName);
+        Task<Coupon> GetCouponByCodeAsync(string code);
 
-        Task<bool> CreateCoupon(Coupon coupon);
+        Task<bool> CreateCouponAsync(Coupon coupon);
 
-        Task<bool> UpdateCoupon(Coupon coupon);
+        Task<bool> UpdateCouponAsync(Coupon coupon);
 
-        Task<bool> DeleteCoupon(string productName);
+        Task<bool> DeleteCouponAsync(string productName);
     }
 }

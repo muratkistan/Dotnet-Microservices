@@ -19,7 +19,7 @@ namespace Discount.Application.Features.Coupon.Commands.Delete
 
         public async Task<bool> Handle(DeleteDiscountCommand request, CancellationToken cancellationToken)
         {
-            var deleted = await _discountRepository.DeleteCoupon(request.ProductName);
+            var deleted = await _discountRepository.DeleteCouponAsync(request.Code);
             return deleted;
         }
     }

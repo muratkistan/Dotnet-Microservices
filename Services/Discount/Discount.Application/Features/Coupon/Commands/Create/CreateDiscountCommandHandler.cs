@@ -23,7 +23,7 @@ namespace Discount.Application.Features.Coupon.Commands.Create
         public async Task<CouponResponse> Handle(CreateDiscountCommand request, CancellationToken cancellationToken)
         {
             var coupon = _mapper.Map<Domain.Entities.Coupon>(request);
-            await _discountRepository.CreateCoupon(coupon);
+            await _discountRepository.CreateCouponAsync(coupon);
             var couponResponse = _mapper.Map<CouponResponse>(coupon);
             return couponResponse;
         }

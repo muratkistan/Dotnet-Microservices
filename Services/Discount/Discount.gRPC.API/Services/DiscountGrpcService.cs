@@ -23,7 +23,7 @@ namespace Discount.gRPC.API.Services
 
         public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
         {
-            var query = new GetDiscountQuery(request.ProductName);
+            var query = new GetDiscountQuery(request.Code);
             var result = await _mediator.Send(query);
             return _mapper.Map<CouponModel>(result);
         }
@@ -32,7 +32,6 @@ namespace Discount.gRPC.API.Services
         {
             var cmd = new CreateDiscountCommand
             {
-                ProductName = request.Coupon.ProductName,
                 Code = request.Coupon.Code,
                 Amount = request.Coupon.Amount,
                 Percent = request.Coupon.Percent,
@@ -47,7 +46,6 @@ namespace Discount.gRPC.API.Services
             var cmd = new UpdateDiscountCommand
             {
                 Id = request.Coupon.Id,
-                ProductName = request.Coupon.ProductName,
                 Code = request.Coupon.Code,
                 Amount = request.Coupon.Amount,
                 IsActive = request.Coupon.IsActive,
@@ -58,7 +56,7 @@ namespace Discount.gRPC.API.Services
 
         public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
         {
-            var cmd = new DeleteDiscountCommand(request.ProductName);
+            var cmd = new DeleteDiscountCommand(request.Code);
             var deleted = await _mediator.Send(cmd);
             var response = new DeleteDiscountResponse
             {

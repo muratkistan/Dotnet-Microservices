@@ -21,15 +21,15 @@ namespace Discount.Infrastructure.Repositories
             _dbSet = _context.Set<Coupon>();
         }
 
-        public async Task<bool> CreateCoupon(Coupon coupon)
+        public async Task<bool> CreateCouponAsync(Coupon coupon)
         {
             await _dbSet.AddAsync(coupon);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteCoupon(string productName)
+        public async Task<bool> DeleteCouponAsync(string code)
         {
-            var coupon = await _dbSet.FirstOrDefaultAsync(x => x.ProductName == productName);
+            var coupon = await _dbSet.FirstOrDefaultAsync(x => x.Code == code);
             if (coupon is null)
                 return false;
 
@@ -37,12 +37,12 @@ namespace Discount.Infrastructure.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Coupon> GetCoupon(string productName)
+        public async Task<Coupon> GetCouponByCodeAsync(string code)
         {
-            return await _dbSet.FirstOrDefaultAsync(x => x.ProductName == productName)
+            return await _dbSet.FirstOrDefaultAsync(x => x.Code == code)
                ?? new Coupon
                {
-                   ProductName = productName,
+                   Code = code,
                    Amount = 0,
                    Percent = 0,
                    Description = "No discount",
@@ -50,7 +50,7 @@ namespace Discount.Infrastructure.Repositories
                };
         }
 
-        public async Task<bool> UpdateCoupon(Coupon coupon)
+        public async Task<bool> UpdateCouponAsync(Coupon coupon)
         {
             var existing = await _dbSet
         .FirstOrDefaultAsync(x => x.Id == coupon.Id);
@@ -59,7 +59,7 @@ namespace Discount.Infrastructure.Repositories
                 return false;
 
             existing.Code = coupon.Code;
-            existing.ProductName = coupon.ProductName;
+            existing.Code = coupon.Code;
             existing.Amount = coupon.Amount;
             existing.Percent = coupon.Percent;
             existing.IsActive = coupon.IsActive;

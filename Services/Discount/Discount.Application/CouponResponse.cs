@@ -13,7 +13,7 @@ namespace Discount.Application
 
         public string Code { get; set; } = default!;
 
-        public string ProductName { get; set; } = string.Empty;
+        public string ProductId { get; set; } = default!;
 
         public double Amount { get; set; }
 

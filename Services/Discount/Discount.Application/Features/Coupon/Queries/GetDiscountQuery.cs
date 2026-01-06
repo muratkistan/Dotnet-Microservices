@@ -9,11 +9,11 @@ namespace Discount.Application.Features.Coupon.Queries
 {
     public class GetDiscountQuery : IRequest<CouponResponse>
     {
-        public string ProductName { get; set; }
+        public string Code { get; set; }
 
-        public GetDiscountQuery(string productName)
+        public GetDiscountQuery(string code)
         {
-            ProductName = productName;
+            Code = code;
         }
     }
 }

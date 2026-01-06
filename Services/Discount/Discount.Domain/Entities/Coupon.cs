@@ -16,8 +16,6 @@ namespace Discount.Domain.Entities
         [MaxLength(50)]
         public string Code { get; set; } = default!;
 
-        public string ProductName { get; set; } = string.Empty;
-
         public double Amount { get; set; }
 
         public int? Percent { get; set; }
@@ -28,5 +26,7 @@ namespace Discount.Domain.Entities
 
         [MaxLength(200)]
         public string? Description { get; set; }
+
+        public int ProductTypeId { get; set; } = 0;
     }
 }

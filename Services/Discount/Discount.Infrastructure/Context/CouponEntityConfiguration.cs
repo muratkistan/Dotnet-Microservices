@@ -17,38 +17,16 @@ namespace Discount.Infrastructure.Context
 
             builder.HasKey(c => c.Id);
 
-            builder.Property(c => c.Id)
-                .UseIdentityColumn();
+            builder.HasIndex(c => new { c.Code, c.IsActive })
+            .IsUnique()
+            .HasFilter("\"IsActive\" = true");
 
             builder.Property(c => c.Code)
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.HasIndex(c => c.Code)
-                .IsUnique();
-
-            builder.Property(c => c.ProductName)
-                .IsRequired()
-                .HasMaxLength(100);
-
-            builder.Property(c => c.Amount)
-                .HasColumnType("decimal(18,2)")
-                .IsRequired();
-
-            builder.Property(c => c.Percent)
-                .IsRequired(false);
-
-            builder.Property(c => c.IsActive)
-                .IsRequired()
-                .HasDefaultValue(true);
-
-            builder.Property(c => c.UsedCount)
-                .IsRequired()
-                .HasDefaultValue(0);
-
             builder.Property(c => c.Description)
-                .HasMaxLength(200)
-                .IsRequired(false);
+                .HasMaxLength(200);
         }
     }
 }

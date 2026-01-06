@@ -19,7 +19,7 @@ namespace Discount.Application.Features.Coupon.Queries
 
         public async Task<CouponResponse> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
-            var coupon = await _discountRepository.GetCoupon(request.ProductName);
+            var coupon = await _discountRepository.GetCouponByCodeAsync(request.Code);
             if (coupon == null)
             {
                 return null;
@@ -27,7 +27,6 @@ namespace Discount.Application.Features.Coupon.Queries
             var couponModel = new CouponResponse
             {
                 Amount = coupon.Amount,
-                ProductName = coupon.ProductName,
                 Code = coupon.Code,
                 Percent = coupon.Percent,
                 IsActive = coupon.IsActive

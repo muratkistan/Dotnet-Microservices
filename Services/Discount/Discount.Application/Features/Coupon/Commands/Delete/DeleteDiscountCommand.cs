@@ -9,11 +9,11 @@ namespace Discount.Application.Features.Coupon.Commands.Delete
 {
     public class DeleteDiscountCommand : IRequest<bool>
     {
-        public string ProductName { get; set; }
+        public string Code { get; set; }
 
-        public DeleteDiscountCommand(string productName)
+        public DeleteDiscountCommand(string code)
         {
-            ProductName = productName;
+            Code = code;
         }
     }
 }
